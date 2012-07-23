@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NarenT.ContactCaster", "NarenT.ContactCaster\NarenT.ContactCaster.csproj", "{9C31BEBD-F6AA-403E-B9FE-E7D8317D3C9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NarenT", "..\NarenT\NarenT.csproj", "{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|iPhoneSimulator = Debug|iPhoneSimulator
@@ -25,6 +27,18 @@ Global
 		{9C31BEBD-F6AA-403E-B9FE-E7D8317D3C9D}.Release|iPhone.Build.0 = Release|iPhone
 		{9C31BEBD-F6AA-403E-B9FE-E7D8317D3C9D}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
 		{9C31BEBD-F6AA-403E-B9FE-E7D8317D3C9D}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Ad-Hoc|iPhone.ActiveCfg = Debug|iPhone
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Ad-Hoc|iPhone.Build.0 = Debug|iPhone
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.AppStore|iPhone.ActiveCfg = Debug|iPhone
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.AppStore|iPhone.Build.0 = Debug|iPhone
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Debug|iPhone.Build.0 = Debug|iPhone
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Release|iPhone.ActiveCfg = Release|iPhone
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Release|iPhone.Build.0 = Release|iPhone
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = NarenT.ContactCaster\NarenT.ContactCaster.csproj

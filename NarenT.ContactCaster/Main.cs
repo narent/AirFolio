@@ -4,6 +4,7 @@ using System.Linq;
 
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using NarenT.Net;
 
 namespace NarenT.ContactCaster
 {
