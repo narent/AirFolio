@@ -59,7 +59,7 @@ namespace NarenT.ContactCaster
 						.Select(address => address.Address.ToString()).FirstOrDefault();
 			}
 
-			HttpServer server = new HttpServer(UrlScheme.https, "localhost", 8080, "/");
+			HttpServer server = new HttpServer(UrlScheme.http, "localhost", 8080, "/");
 			Console.WriteLine ("http server running on " + ipAddress + ":8080");
 			server.Actions.Add(new ContactsAction());
 			server.Actions.Add(new ContactImageAction());

@@ -48,3 +48,4 @@ _ReSharper*/
 
 # Office Temp Files
 ~$*
+.sass-cache/
