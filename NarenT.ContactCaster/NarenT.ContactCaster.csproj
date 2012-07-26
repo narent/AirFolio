@@ -110,4 +110,11 @@
       <Name>NarenT</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="html\" />
+    <Folder Include="js\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="html\index.html" />
+  </ItemGroup>
 </Project>

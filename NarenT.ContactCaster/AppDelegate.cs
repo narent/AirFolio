@@ -10,6 +10,7 @@ using System.Json;
 using System.Net;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
+using NarenT.Net.HttpServerActions;
 
 namespace NarenT.ContactCaster
 {
@@ -58,10 +59,11 @@ namespace NarenT.ContactCaster
 						.Select(address => address.Address.ToString()).FirstOrDefault();
 			}
 
-			HttpServer server = new HttpServer(UrlScheme.http, "localhost", 8080, "/");
+			HttpServer server = new HttpServer(UrlScheme.https, "localhost", 8080, "/");
 			Console.WriteLine ("http server running on " + ipAddress + ":8080");
 			server.Actions.Add(new ContactsAction());
 			server.Actions.Add(new ContactImageAction());
+			server.Actions.Add(new StaticFileAction());
 			server.Start();
 		}
 	}
