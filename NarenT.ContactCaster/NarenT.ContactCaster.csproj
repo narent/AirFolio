@@ -121,5 +121,14 @@
     <Content Include="static\js\jquery-1.7.2.min.js" />
     <Content Include="static\js\knockout-2.1.0.js" />
     <Content Include="static\index.html" />
+    <Content Include="static\images\dark-metal-grid-1.jpg" />
+    <Content Include="static\images\dark-metal-grid-2.jpg" />
+    <Content Include="static\images\dark-metal-grid-3.jpg" />
+    <Content Include="static\images\dark-metal-grid-4.jpg" />
+    <Content Include="static\images\dark-metal-grid-5.jpg" />
+    <Content Include="static\images\dark-metal-grid-6.jpg" />
+    <Content Include="static\images\dark-metal-grid-7.jpg" />
+    <Content Include="static\images\dark-metal-grid-8.jpg" />
+    <Content Include="static\images\letterpress.gif" />
   </ItemGroup>
 </Project>
