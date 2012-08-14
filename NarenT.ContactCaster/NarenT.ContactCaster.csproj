@@ -98,6 +98,7 @@
     <Compile Include="DetailViewController.designer.cs">
       <DependentUpon>DetailViewController.cs</DependentUpon>
     </Compile>
+    <Compile Include="HttpActions\FilesAction.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="RootViewController.xib" />
@@ -112,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="static\" />
+    <Folder Include="HttpActions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="static\css\cssreset-min.css" />
