@@ -11,7 +11,7 @@ namespace NarenT.ContactCaster
 {
 	public partial class FilesListViewController : DialogViewController
 	{
-		public FilesListViewController () : base (UITableViewStyle.Plain, null)
+		public FilesListViewController () : base (UITableViewStyle.Grouped, null)
 		{
 			this.Root = new RootElement ("Air Drive 2") {
 				new Section (string.Empty){
@@ -23,6 +23,7 @@ namespace NarenT.ContactCaster
 
 			this.NavigationItem.TitleView = AppDelegate.NavigationBarTitleView;
 			this.SetToolbarItems(AppDelegate.ToolbarButtons, false);
+			this.TableView.BackgroundColor = UIColor.ScrollViewTexturedBackgroundColor;
 		}
 	}
 }
