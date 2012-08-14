@@ -61,51 +61,44 @@ namespace NarenT.ContactCaster
 
 			HttpServer server = new HttpServer(UrlScheme.http, "localhost", 8080, "/");
 			Console.WriteLine ("http server running on " + ipAddress + ":8080");
-			server.Actions.Add(new ContactsAction());
-			server.Actions.Add(new ContactImageAction());
+			server.Actions.Add(new FilesAction());
 			server.Actions.Add(new StaticFileAction());
 			server.Start();
 		}
 	}
 
-	public class ContactsAction : HttpAction
+	public class FilesAction : HttpAction
 	{
-		public ContactsAction() : base("ContactsAction")
+		public FilesAction() : base("ContactsAction")
 		{
 		}
 
 		#region implemented abstract members of NarenT.Net.HttpAction
 		public override ActionResult GET (System.Net.HttpListenerContext context, string httpActionPath)
 		{
-			JsonArray contacts = new JsonArray();
-			var addressBook = new ABAddressBook();
-			var people = addressBook.GetPeople();
-			foreach (var item in people) {
-				contacts.Add(new JsonObject { 
-					{ "FirstName", item.FirstName },
-					{ "LastName", item.LastName },
-					{ "Emails", ToJsonArray(item.GetEmails()) },
-					{ "Phones", ToJsonArray(item.GetPhones()) },
-					{ "RelatedNames", ToJsonArray(item.GetRelatedNames()) },
-					{ "Urls", ToJsonArray(item.GetUrls()) },
-					{ "HasImage", new JsonPrimitive(item.HasImage) },
-					{ "Image", item.HasImage ? "/" + item.Id + "/image" : string.Empty }
-				});
-			}
+			JsonArray files = new JsonArray();
+			files.Add(new JsonObject { 
+				{ "Name", "Assignment.doc" },
+				{ "Size", "100Kb" },
+				{ "Type", "DOC" }
+			});
+
+			files.Add(new JsonObject { 
+				{ "Name", "Acme - Contract.pdf" },
+				{ "Size", "100Kb" },
+				{ "Type", "PDF" }
+			});
+
+			files.Add(new JsonObject { 
+				{ "Name", "Air Ticket.pdf" },
+				{ "Size", "100Kb" },
+				{ "Type", "PDF" }
+			});
 
 			var result = new ActionResult();
-			result.Data = System.Text.Encoding.UTF8.GetBytes(contacts.ToString());
+			result.Data = System.Text.Encoding.UTF8.GetBytes(files.ToString());
 			result.ContentType = "application/json";
 			return result;
-		}
-
-		public JsonArray ToJsonArray(ABMultiValue<string> multiValues)
-		{
-			JsonObject[] jsonObjs = multiValues
-				.Select(email => new JsonObject { {"Label", (string)email.Label}, { "Value", (string)email.Value } })
-						.ToArray();
-			return new JsonArray(jsonObjs);
-
 		}
 
 		public override ActionResult POST (System.Net.HttpListenerContext context, string httpActionPath)
@@ -115,35 +108,7 @@ namespace NarenT.ContactCaster
 
 		public override bool WillProcess (string requestPath)
 		{
-			return requestPath == "/contacts";
-		}
-		#endregion
-	}
-
-	public class ContactImageAction : HttpAction
-	{
-		public ContactImageAction() : base("ContactImageAction")
-		{
-		}
-
-		#region implemented abstract members of NarenT.Net.HttpAction
-		public override ActionResult GET (HttpListenerContext context, string httpActionPath)
-		{
-			var result = new ActionResult();
-			result.Data = new ABAddressBook().GetPerson(1).Image.ToArray();
-			result.ContentType = "image/jpeg";
-			return result;
-		}
-
-		public override ActionResult POST (HttpListenerContext context, string httpActionPath)
-		{
-			throw new System.NotImplementedException ();
-		}
-
-		public override bool WillProcess (string requestPath)
-		{
-			Regex r = new Regex("/contacts/\\d+/image");
-			return r.IsMatch(requestPath);
+			return requestPath == "/files";
 		}
 		#endregion
 	}

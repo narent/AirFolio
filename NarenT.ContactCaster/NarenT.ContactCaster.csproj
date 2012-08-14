@@ -111,16 +111,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="html\" />
-    <Folder Include="js\" />
+    <Folder Include="static\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="html\index.html" />
-    <Content Include="css\cssreset-min.css" />
-    <Content Include="css\style.css" />
-    <Content Include="css\style.scss" />
-    <Content Include="html\contacts.json" />
-    <Content Include="js\jquery-1.7.2.min.js" />
-    <Content Include="js\knockout-2.1.0.js" />
+    <Content Include="static\css\cssreset-min.css" />
+    <Content Include="static\css\style.css" />
+    <Content Include="static\css\style.scss" />
+    <Content Include="static\html\files" />
+    <Content Include="static\js\jquery-1.7.2.min.js" />
+    <Content Include="static\js\knockout-2.1.0.js" />
+    <Content Include="static\index.html" />
   </ItemGroup>
 </Project>

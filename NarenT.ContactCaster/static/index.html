@@ -1,0 +1,48 @@
+<html>
+	<head>
+		<title>Air Drive 2</title>
+		<link rel="stylesheet" type="text/css" href="/css/cssreset-min.css"/>
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
+		<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
+		<script type="text/javascript" src="/js/knockout-2.1.0.js"></script>
+		<script type="text/javascript">
+			$(function() {
+				function File(data) {
+				    this.Name = ko.observable(data.Name);
+				    this.Size = ko.observable(data.Size);
+				    this.Type = data.Type;
+				}
+
+				function FileViewModel() {
+				    var self = this;
+				    self.files = ko.observableArray([]);
+
+				    $.getJSON("/files", function(allData) {
+				        var mappedFiles = $.map(allData, function(data) { return new File(data); });
+				        self.files(mappedFiles);
+				    }); 
+				}
+
+				ko.applyBindings(new FileViewModel());
+
+				$(".file").live("click", function(){
+					//$(this).children(".details").slideToggle();
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h1>Air Drive 2</h1>
+		    <ul data-bind="foreach: files" class="files">
+		    	<li class="file">
+		    		<h3 data-bind="text: Name"></h3>
+		    		<div data-bind="text: Type"></div>
+		    		<div data-bind="text: Size"></div>
+			    </li>
+			</ul>
+		</div>
+	</body>
+</html>

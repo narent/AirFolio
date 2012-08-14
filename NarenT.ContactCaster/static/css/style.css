@@ -1,0 +1,45 @@
+body {
+  margin: 0;
+  padding: 0;
+  padding-top: 10px;
+  text-align: center;
+  background-color: #cccccc; }
+
+#content {
+  width: 800px;
+  /* set to desired width in px or percent */
+  text-align: left;
+  /* optionally you could use "justified" */
+  border: 0px;
+  /* Changing this value will add lines around the centered area */
+  padding: 0;
+  margin: 0 auto; }
+
+body {
+  font-family: 'Verdana', sans-serif;
+  background-color: gray; }
+
+h1 {
+  color: white;
+  font-weight: bold;
+  font-size: 50px;
+  text-align: center; }
+
+.files .file {
+  background-color: #c8c8c8;
+  padding: 10px;
+  border-bottom: 1px gray solid;
+  margin-bottom: 10px; }
+  .files .file .details {
+    display: none; }
+    .files .file .details .text {
+      float: left; }
+    .files .file .details img {
+      float: right;
+      border: 8px white solid;
+      height: 200px;
+      width: 200px;
+      border-radius: 5px;
+      -moz-box-shadow: 0px -2px 17px -5px black;
+      -webkit-box-shadow: 0px -2px 17px -5px black;
+      box-shadow: 0px -2px 17px -5px black; }
