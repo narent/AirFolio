@@ -15,15 +15,9 @@ namespace NarenT.ContactCaster
 		{
 			this.Root = new RootElement ("Air Drive 2") {
 				new Section (string.Empty){
-					new StringElement ("Assignment.doc", () => {
-						new UIAlertView ("Hola", "Assignment.doc", null, "Continue").Show ();
-					}),
-					new StringElement ("Acme-Contract.pdf", () => {
-						new UIAlertView ("Hola", "Acme-Contract.pdf", null, "Continue").Show ();
-					}),
-					new StringElement ("LA-NY Flight.pdf", () => {
-						new UIAlertView ("Hola", "LA-NY Flight.pdf", null, "Continue").Show ();
-					})
+					new StyledStringElement ("Assignment.doc") { Accessory = UITableViewCellAccessory.DisclosureIndicator },
+					new StyledStringElement ("Acme-Contract.pdf") { Accessory = UITableViewCellAccessory.DisclosureIndicator },
+					new StyledStringElement ("LA-NY Flight.pdf") { Accessory = UITableViewCellAccessory.DisclosureIndicator }
 				},
 			};
 
