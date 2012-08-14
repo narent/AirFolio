@@ -11,6 +11,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using NarenT.Net.HttpServerActions;
+using NarenT.ContactCaster.HttpActions;
 
 namespace NarenT.ContactCaster
 {
