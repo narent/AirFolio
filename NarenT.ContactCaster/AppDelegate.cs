@@ -24,14 +24,16 @@ namespace NarenT.ContactCaster
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate
 	{
+		private static UILabel HttpAddressLabel;
+		private static UILabel TitleLabel;
+		public static UIView NavigationBarTitleView;
+		public static UIBarButtonItem[] ToolbarButtons;
+
 		// class-level declarations
 		private UIWindow window;
 		private UINavigationController navigationController;
 		private static UIBarButtonItem StartHttpServerButton;
 		private HttpServer AirDrive2HttpServer;
-
-		public static UIView NavigationBarTitleView;
-		public static UIBarButtonItem[] ToolbarButtons;
 		
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -50,30 +52,29 @@ namespace NarenT.ContactCaster
 			};
 
 			NavigationBarTitleView = new UIView(new RectangleF(0, 0, 320, 44));
-			var titleLabel = new UILabel();
-			titleLabel.TextAlignment = UITextAlignment.Center;
-			titleLabel.Text = "Air Drive 2";
-			titleLabel.Font = UIFont.BoldSystemFontOfSize(23.0f);
-			titleLabel.ShadowColor = UIColor.FromWhiteAlpha(0.0f, 0.5f);
-			titleLabel.BackgroundColor = UIColor.Clear;
-			titleLabel.TextColor = UIColor.White;
-			titleLabel.AutoresizingMask = UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleTopMargin;
-			titleLabel.SizeToFit();
+			TitleLabel = new UILabel();
+			TitleLabel.TextAlignment = UITextAlignment.Center;
+			TitleLabel.Text = "Air Drive 2";
+			TitleLabel.Font = UIFont.BoldSystemFontOfSize(23.0f);
+			TitleLabel.ShadowColor = UIColor.FromWhiteAlpha(0.0f, 0.5f);
+			TitleLabel.BackgroundColor = UIColor.Clear;
+			TitleLabel.TextColor = UIColor.White;
+			TitleLabel.AutoresizingMask = UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleTopMargin;
+			TitleLabel.SizeToFit();
 
-			titleLabel.Center = NavigationBarTitleView.Center;
-			titleLabel.SetDeltaPosition(0.0f, -8.0f);
+			TitleLabel.Center = NavigationBarTitleView.Center;
 
-			var httpAddressLabel = new UILabel();
-			titleLabel.TextAlignment = UITextAlignment.Center;
-			httpAddressLabel.Text = "http://localhost:8080/index.html";
-			httpAddressLabel.BackgroundColor = UIColor.Clear;
-			httpAddressLabel.Font = UIFont.SystemFontOfSize(UIFont.SystemFontSize);
-			httpAddressLabel.SizeToFit();
-			httpAddressLabel.Center = NavigationBarTitleView.Center;
-			httpAddressLabel.SetDeltaPosition(0.0f, 10.0f);
+			HttpAddressLabel = new UILabel();
+			HttpAddressLabel.TextAlignment = UITextAlignment.Center;
+			//HttpAddressLabel.Text = "http://localhost:8080/index.html";
+			HttpAddressLabel.BackgroundColor = UIColor.Clear;
+			HttpAddressLabel.Font = UIFont.SystemFontOfSize(UIFont.SystemFontSize);
+			HttpAddressLabel.SizeToFit();
+			HttpAddressLabel.Center = NavigationBarTitleView.Center;
+			HttpAddressLabel.SetDeltaPosition(0.0f, 10.0f);
 
-			NavigationBarTitleView.AddSubview(titleLabel);
-			NavigationBarTitleView.AddSubview(httpAddressLabel);
+			NavigationBarTitleView.AddSubview(TitleLabel);
+			NavigationBarTitleView.AddSubview(HttpAddressLabel);
 
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 
@@ -94,11 +95,13 @@ namespace NarenT.ContactCaster
 			{
 				this.StartHttpServer();
 				StartHttpServerButton.TintColor = UIColor.Red;
+				ShowHttpAddress();
 			} 
 			else 
 			{
 				this.StopHttpServer();
 				StartHttpServerButton.TintColor = UIColor.Gray;
+				HideHttpAddress();
 			}
 		}
 
@@ -126,6 +129,27 @@ namespace NarenT.ContactCaster
 			if (this.AirDrive2HttpServer != null && this.AirDrive2HttpServer.IsListening) {
 				this.AirDrive2HttpServer.Stop();
 			}
+		}
+
+		private void ShowHttpAddress()
+		{
+			HttpAddressLabel.Text = this.AirDrive2HttpServer.Prefix;
+			HttpAddressLabel.SizeToFit();
+			HttpAddressLabel.Center = NavigationBarTitleView.Center;
+			HttpAddressLabel.Alpha = 0.0f;
+			HttpAddressLabel.SetDeltaPosition(0.0f, 10.0f);
+			UIView.Animate(0.5, () => {
+				HttpAddressLabel.Alpha = 1.0f;
+				TitleLabel.SetDeltaPosition(0.0f, -8.0f);
+			});
+		}
+
+		private void HideHttpAddress()
+		{
+			UIView.Animate(0.5, () => {
+				TitleLabel.SetDeltaPosition(0.0f, 8.0f);
+				HttpAddressLabel.Alpha = 0.0f;
+			});
 		}
 	}
 }
