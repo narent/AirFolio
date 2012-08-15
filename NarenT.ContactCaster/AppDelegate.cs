@@ -51,6 +51,23 @@ namespace NarenT.ContactCaster
 				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace) 
 			};
 
+			InitNavigationTitleView();
+
+			window = new UIWindow (UIScreen.MainScreen.Bounds);
+
+			var controller = new FilesListViewController ();
+			navigationController = new UINavigationController (controller);
+			navigationController.ToolbarHidden = false;
+			window.RootViewController = navigationController;
+
+			// make the window visible
+			window.MakeKeyAndVisible ();
+
+			return true;
+		}
+
+		private void InitNavigationTitleView()
+		{
 			NavigationBarTitleView = new UIView(new RectangleF(0, 0, 320, 44));
 			TitleLabel = new UILabel();
 			TitleLabel.TextAlignment = UITextAlignment.Center;
@@ -66,7 +83,6 @@ namespace NarenT.ContactCaster
 
 			HttpAddressLabel = new UILabel();
 			HttpAddressLabel.TextAlignment = UITextAlignment.Center;
-			//HttpAddressLabel.Text = "http://localhost:8080/index.html";
 			HttpAddressLabel.BackgroundColor = UIColor.Clear;
 			HttpAddressLabel.Font = UIFont.SystemFontOfSize(UIFont.SystemFontSize);
 			HttpAddressLabel.SizeToFit();
@@ -75,18 +91,6 @@ namespace NarenT.ContactCaster
 
 			NavigationBarTitleView.AddSubview(TitleLabel);
 			NavigationBarTitleView.AddSubview(HttpAddressLabel);
-
-			window = new UIWindow (UIScreen.MainScreen.Bounds);
-
-			var controller = new FilesListViewController ();
-			navigationController = new UINavigationController (controller);
-			navigationController.ToolbarHidden = false;
-			window.RootViewController = navigationController;
-
-			// make the window visible
-			window.MakeKeyAndVisible ();
-
-			return true;
 		}
 
 		private void StartButtonTapped()
