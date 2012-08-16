@@ -101,6 +101,7 @@
     </Compile>
     <Compile Include="HttpActions\FilesAction.cs" />
     <Compile Include="FilesListViewController.cs" />
+    <Compile Include="FileDetailViewController.cs" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="RootViewController.xib" />

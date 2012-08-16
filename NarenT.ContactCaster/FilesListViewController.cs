@@ -6,6 +6,7 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.Dialog;
+using System.Drawing;
 
 namespace NarenT.ContactCaster
 {
@@ -13,17 +14,31 @@ namespace NarenT.ContactCaster
 	{
 		public FilesListViewController () : base (UITableViewStyle.Grouped, null)
 		{
-			this.Root = new RootElement ("Air Drive 2") {
+			this.Root = new RootElement ("Air Folio") {
 				new Section (string.Empty){
-					new StyledStringElement ("Assignment.doc") { Accessory = UITableViewCellAccessory.DisclosureIndicator },
-					new StyledStringElement ("Acme-Contract.pdf") { Accessory = UITableViewCellAccessory.DisclosureIndicator },
-					new StyledStringElement ("LA-NY Flight.pdf") { Accessory = UITableViewCellAccessory.DisclosureIndicator }
+					CreateElement ("Assignment.doc"),
+					CreateElement ("Acme-Contract.pdf"),
+					CreateElement ("LA-NY Flight.pdf")
 				},
 			};
+		}
 
+		public override void ViewWillAppear (bool animated)
+		{
+			base.ViewWillAppear (animated);
 			this.NavigationItem.TitleView = AppDelegate.NavigationBarTitleView;
 			this.SetToolbarItems(AppDelegate.ToolbarButtons, false);
 			this.TableView.BackgroundColor = UIColor.ScrollViewTexturedBackgroundColor;
+		}
+
+		public void ShowFile(string filename) 
+		{
+			NavigationController.PushViewController(new FileDetailViewController(filename), true);
+		}
+
+		private StyledStringElement CreateElement(string filename)
+		{
+			return new StyledStringElement(filename, () => { ShowFile(filename); }) { Accessory = UITableViewCellAccessory.DisclosureIndicator };
 		}
 	}
 }

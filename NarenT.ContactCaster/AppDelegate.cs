@@ -33,7 +33,7 @@ namespace NarenT.ContactCaster
 		private UIWindow window;
 		private UINavigationController navigationController;
 		private static UIBarButtonItem StartHttpServerButton;
-		private HttpServer AirDrive2HttpServer;
+		private HttpServer AirFolioHttpServer;
 		
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -55,6 +55,7 @@ namespace NarenT.ContactCaster
 
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
 
+
 			var controller = new FilesListViewController ();
 			navigationController = new UINavigationController (controller);
 			navigationController.ToolbarHidden = false;
@@ -71,7 +72,7 @@ namespace NarenT.ContactCaster
 			NavigationBarTitleView = new UIView(new RectangleF(0, 0, 320, 44));
 			TitleLabel = new UILabel();
 			TitleLabel.TextAlignment = UITextAlignment.Center;
-			TitleLabel.Text = "Air Drive 2";
+			TitleLabel.Text = "Air Folio";
 			TitleLabel.Font = UIFont.BoldSystemFontOfSize(23.0f);
 			TitleLabel.ShadowColor = UIColor.FromWhiteAlpha(0.0f, 0.5f);
 			TitleLabel.BackgroundColor = UIColor.Clear;
@@ -87,7 +88,6 @@ namespace NarenT.ContactCaster
 			HttpAddressLabel.Font = UIFont.SystemFontOfSize(UIFont.SystemFontSize);
 			HttpAddressLabel.SizeToFit();
 			HttpAddressLabel.Center = NavigationBarTitleView.Center;
-			HttpAddressLabel.SetDeltaPosition(0.0f, 10.0f);
 
 			NavigationBarTitleView.AddSubview(TitleLabel);
 			NavigationBarTitleView.AddSubview(HttpAddressLabel);
@@ -95,7 +95,7 @@ namespace NarenT.ContactCaster
 
 		private void StartButtonTapped()
 		{
-			if (this.AirDrive2HttpServer == null || !this.AirDrive2HttpServer.IsListening)
+			if (this.AirFolioHttpServer == null || !this.AirFolioHttpServer.IsListening)
 			{
 				this.StartHttpServer();
 				StartHttpServerButton.TintColor = UIColor.Red;
@@ -121,23 +121,23 @@ namespace NarenT.ContactCaster
 						.Select(address => address.Address.ToString()).FirstOrDefault();
 			}
 
-			this.AirDrive2HttpServer = new HttpServer(UrlScheme.http, "localhost", 8080, "/");
+			this.AirFolioHttpServer = new HttpServer(UrlScheme.http, "localhost", 8080, "/");
 			Console.WriteLine ("http server running on " + ipAddress + ":8080");
-			this.AirDrive2HttpServer.Actions.Add(new FilesAction());
-			this.AirDrive2HttpServer.Actions.Add(new StaticFileAction());
-			this.AirDrive2HttpServer.Start();
+			this.AirFolioHttpServer.Actions.Add(new FilesAction());
+			this.AirFolioHttpServer.Actions.Add(new StaticFileAction());
+			this.AirFolioHttpServer.Start();
 		}
 
 		private void StopHttpServer() 
 		{
-			if (this.AirDrive2HttpServer != null && this.AirDrive2HttpServer.IsListening) {
-				this.AirDrive2HttpServer.Stop();
+			if (this.AirFolioHttpServer != null && this.AirFolioHttpServer.IsListening) {
+				this.AirFolioHttpServer.Stop();
 			}
 		}
 
 		private void ShowHttpAddress()
 		{
-			HttpAddressLabel.Text = this.AirDrive2HttpServer.Prefix;
+			HttpAddressLabel.Text = this.AirFolioHttpServer.Prefix;
 			HttpAddressLabel.SizeToFit();
 			HttpAddressLabel.Center = NavigationBarTitleView.Center;
 			HttpAddressLabel.Alpha = 0.0f;
