@@ -1,6 +1,7 @@
 using System;
 using NarenT.Net;
 using System.Json;
+using System.Linq;
 
 namespace NarenT.AirFolio.HttpActions
 {
@@ -14,23 +15,14 @@ namespace NarenT.AirFolio.HttpActions
 		public override ActionResult GET (System.Net.HttpListenerContext context, string httpActionPath)
 		{
 			JsonArray files = new JsonArray();
-			files.Add(new JsonObject { 
-				{ "Name", "Assignment.doc" },
-				{ "Size", "100Kb" },
-				{ "Type", "DOC" }
-			});
-
-			files.Add(new JsonObject { 
-				{ "Name", "Acme - Contract.pdf" },
-				{ "Size", "100Kb" },
-				{ "Type", "PDF" }
-			});
-
-			files.Add(new JsonObject { 
-				{ "Name", "Air Ticket.pdf" },
-				{ "Size", "100Kb" },
-				{ "Type", "PDF" }
-			});
+			files.AddRange(
+				FileRepository.GetFiles()
+				.Select(f => (JsonValue)new JsonObject { 
+					{ "Name", f.Name },
+					{ "Size", f.Length },
+					{ "Type", f.Extension }
+				})
+			);
 
 			var result = new ActionResult();
 			result.Data = System.Text.Encoding.UTF8.GetBytes(files.ToString());

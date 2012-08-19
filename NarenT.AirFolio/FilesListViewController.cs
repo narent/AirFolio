@@ -7,6 +7,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.Dialog;
 using System.Drawing;
+using System.IO;
 
 namespace NarenT.AirFolio
 {
@@ -16,9 +17,7 @@ namespace NarenT.AirFolio
 		{
 			this.Root = new RootElement ("Air Folio") {
 				new Section (string.Empty){
-					CreateElement ("Assignment.doc"),
-					CreateElement ("Acme-Contract.pdf"),
-					CreateElement ("LA-NY Flight.pdf")
+					FileRepository.GetFiles().Select(this.CreateElement)
 				},
 			};
 		}
@@ -35,9 +34,9 @@ namespace NarenT.AirFolio
 			NavigationController.PushViewController(new FileDetailViewController(filename), true);
 		}
 
-		private StyledStringElement CreateElement(string filename)
+		private Element CreateElement(FileInfo file)
 		{
-			return new StyledStringElement(filename, () => { ShowFile(filename); }) { Accessory = UITableViewCellAccessory.DisclosureIndicator };
+			return new StyledStringElement(file.Name, () => { ShowFile(file.Name); }) { Accessory = UITableViewCellAccessory.DisclosureIndicator };
 		}
 	}
 }

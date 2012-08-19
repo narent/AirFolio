@@ -15,6 +15,7 @@ using NarenT.AirFolio.HttpActions;
 using MonoTouch.Dialog;
 using System.Drawing;
 using NarenT.Extensions;
+using System.IO;
 
 namespace NarenT.AirFolio
 {
@@ -46,6 +47,21 @@ namespace NarenT.AirFolio
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
+
+			string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
+			var testPaths = new string[] { 
+				Path.Combine(documentsPath, "Assignment.docx"),
+				Path.Combine(documentsPath, "Notes.txt"),
+				Path.Combine(documentsPath, "NY - LA Air Ticket.pdf")
+			};
+
+			foreach (var testPath in testPaths) {
+				if (File.Exists(testPath)) {
+					File.Delete(testPath);
+				}
+				File.WriteAllText(testPath, "Howdy, world.");
+			}
+
 			StartHttpServerButton = new UIBarButtonItem(UIBarButtonSystemItem.Play, (sender, args) => { this.StartButtonTapped(); });
 			var startHttpServerSwitch = new UISwitch();
 			startHttpServerSwitch.ValueChanged += (sender, e) => { this.StartButtonTapped(); };
