@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NarenT.ContactCaster", "NarenT.ContactCaster\NarenT.ContactCaster.csproj", "{9C31BEBD-F6AA-403E-B9FE-E7D8317D3C9D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NarenT.AirFolio", "NarenT.ContactCaster\NarenT.AirFolio.csproj", "{9C31BEBD-F6AA-403E-B9FE-E7D8317D3C9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NarenT", "..\NarenT\NarenT.csproj", "{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}"
 EndProject
@@ -41,6 +41,6 @@ Global
 		{BFFE7B66-AA50-4DAB-9B20-5F8241F7CAF7}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
-		StartupItem = NarenT.ContactCaster\NarenT.ContactCaster.csproj
+		StartupItem = NarenT.ContactCaster\NarenT.AirFolio.csproj
 	EndGlobalSection
 EndGlobal
