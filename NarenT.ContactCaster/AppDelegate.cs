@@ -24,16 +24,18 @@ namespace NarenT.ContactCaster
 	[Register ("AppDelegate")]
 	public partial class AppDelegate : UIApplicationDelegate
 	{
-		private static UILabel HttpAddressLabel;
-		private static UILabel TitleLabel;
 		public static UIView NavigationBarTitleView;
 		public static UIBarButtonItem[] ToolbarButtons;
+		public static Section SpacerSection = new Section(string.Empty);
 
 		// class-level declarations
 		private UIWindow window;
 		private UINavigationController navigationController;
 		private static UIBarButtonItem StartHttpServerButton;
 		private HttpServer AirFolioHttpServer;
+		private UILabel AddressLabel;
+		private static UIBarButtonItem HttpServerSwitchBarButtonItem;
+
 		
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
@@ -45,21 +47,29 @@ namespace NarenT.ContactCaster
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
 			StartHttpServerButton = new UIBarButtonItem(UIBarButtonSystemItem.Play, (sender, args) => { this.StartButtonTapped(); });
+			var startHttpServerSwitch = new UISwitch();
+			startHttpServerSwitch.ValueChanged += (sender, e) => { this.StartButtonTapped(); };
+			HttpServerSwitchBarButtonItem = new UIBarButtonItem(startHttpServerSwitch);
+
 			ToolbarButtons = new[] { 
 				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace), 
-				StartHttpServerButton,
-				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace) 
+				HttpServerSwitchBarButtonItem,
+				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace)
 			};
 
-			InitNavigationTitleView();
-
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
-
 
 			var controller = new FilesListViewController ();
 			navigationController = new UINavigationController (controller);
 			navigationController.ToolbarHidden = false;
-			window.RootViewController = navigationController;
+			window.AddSubview(navigationController.View);
+			//window.RootViewController = navigationController;
+
+			AddressLabel = new UILabel(new RectangleF(0.0f, 460.0f, 320.0f, 20.0f)) { BackgroundColor = UIColor.Black };
+			AddressLabel.TextColor = UIColor.White;
+			AddressLabel.TextAlignment = UITextAlignment.Center;
+			window.AddSubview(AddressLabel);
+			window.SendSubviewToBack(AddressLabel);
 
 			// make the window visible
 			window.MakeKeyAndVisible ();
@@ -67,38 +77,12 @@ namespace NarenT.ContactCaster
 			return true;
 		}
 
-		private void InitNavigationTitleView()
-		{
-			NavigationBarTitleView = new UIView(new RectangleF(0, 0, 320, 44));
-			TitleLabel = new UILabel();
-			TitleLabel.TextAlignment = UITextAlignment.Center;
-			TitleLabel.Text = "Air Folio";
-			TitleLabel.Font = UIFont.BoldSystemFontOfSize(23.0f);
-			TitleLabel.ShadowColor = UIColor.FromWhiteAlpha(0.0f, 0.5f);
-			TitleLabel.BackgroundColor = UIColor.Clear;
-			TitleLabel.TextColor = UIColor.White;
-			TitleLabel.AutoresizingMask = UIViewAutoresizing.FlexibleRightMargin | UIViewAutoresizing.FlexibleBottomMargin | UIViewAutoresizing.FlexibleLeftMargin | UIViewAutoresizing.FlexibleTopMargin;
-			TitleLabel.SizeToFit();
-
-			TitleLabel.Center = NavigationBarTitleView.Center;
-
-			HttpAddressLabel = new UILabel();
-			HttpAddressLabel.TextAlignment = UITextAlignment.Center;
-			HttpAddressLabel.BackgroundColor = UIColor.Clear;
-			HttpAddressLabel.Font = UIFont.SystemFontOfSize(UIFont.SystemFontSize);
-			HttpAddressLabel.SizeToFit();
-			HttpAddressLabel.Center = NavigationBarTitleView.Center;
-
-			NavigationBarTitleView.AddSubview(TitleLabel);
-			NavigationBarTitleView.AddSubview(HttpAddressLabel);
-		}
-
 		private void StartButtonTapped()
 		{
 			if (this.AirFolioHttpServer == null || !this.AirFolioHttpServer.IsListening)
 			{
 				this.StartHttpServer();
-				StartHttpServerButton.TintColor = UIColor.Red;
+				StartHttpServerButton.TintColor = UIColor.Gray;
 				ShowHttpAddress();
 			} 
 			else 
@@ -137,22 +121,26 @@ namespace NarenT.ContactCaster
 
 		private void ShowHttpAddress()
 		{
-			HttpAddressLabel.Text = this.AirFolioHttpServer.Prefix;
-			HttpAddressLabel.SizeToFit();
-			HttpAddressLabel.Center = NavigationBarTitleView.Center;
-			HttpAddressLabel.Alpha = 0.0f;
-			HttpAddressLabel.SetDeltaPosition(0.0f, 10.0f);
+			var dialogViewController = this.navigationController.TopViewController as DialogViewController;
 			UIView.Animate(0.5, () => {
-				HttpAddressLabel.Alpha = 1.0f;
-				TitleLabel.SetDeltaPosition(0.0f, -8.0f);
+				AddressLabel.Text = AirFolioHttpServer.Prefix;
+				this.navigationController.View.SetDeltaHeight(-20.0f);
+				if (dialogViewController.Root[0] != SpacerSection)
+				{
+					dialogViewController.Root.Insert(0, UITableViewRowAnimation.Top, SpacerSection);
+				}
 			});
 		}
 
 		private void HideHttpAddress()
 		{
 			UIView.Animate(0.5, () => {
-				TitleLabel.SetDeltaPosition(0.0f, 8.0f);
-				HttpAddressLabel.Alpha = 0.0f;
+				this.navigationController.View.SetDeltaHeight(20.0f);
+				var dialogViewController = this.navigationController.TopViewController as DialogViewController;
+				if (dialogViewController.Root[0] == SpacerSection) 
+				{
+					dialogViewController.Root.RemoveAt(0, UITableViewRowAnimation.Bottom);
+				}
 			});
 		}
 	}

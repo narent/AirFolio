@@ -26,7 +26,6 @@ namespace NarenT.ContactCaster
 		public override void ViewWillAppear (bool animated)
 		{
 			base.ViewWillAppear (animated);
-			this.NavigationItem.TitleView = AppDelegate.NavigationBarTitleView;
 			this.SetToolbarItems(AppDelegate.ToolbarButtons, false);
 			this.TableView.BackgroundColor = UIColor.ScrollViewTexturedBackgroundColor;
 		}
