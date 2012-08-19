@@ -124,7 +124,9 @@ namespace NarenT.AirFolio
 			this.AirFolioHttpServer = new HttpServer(UrlScheme.http, "localhost", 8080, "/");
 			Console.WriteLine ("http server running on " + ipAddress + ":8080");
 			this.AirFolioHttpServer.Actions.Add(new FilesAction());
-			this.AirFolioHttpServer.Actions.Add(new StaticFileAction());
+			var staticFileAction = new StaticFileAction();
+			StaticFileAction.AddStaticFileMapping("files/", Environment.GetFolderPath (Environment.SpecialFolder.Personal));
+			this.AirFolioHttpServer.Actions.Add(staticFileAction);
 			this.AirFolioHttpServer.Start();
 		}
 
