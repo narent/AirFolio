@@ -36,7 +36,21 @@ namespace NarenT.AirFolio
 
 		private Element CreateElement(FileInfo file)
 		{
-			return new StyledStringElement(file.Name, () => { ShowFile(file.Name); }) { Accessory = UITableViewCellAccessory.DisclosureIndicator };
+			var subtitle = "Size: " + GetSizeDisplayString(file.Length) + " Modified:" + file.LastWriteTimeUtc.ToLocalTime().ToString("dd-MM-yy hh:mm");
+			return new StyledStringElement(file.Name, subtitle, UITableViewCellStyle.Subtitle) { Accessory = UITableViewCellAccessory.DisclosureIndicator };
+		}
+
+		private string GetSizeDisplayString(long length)
+		{
+			if (length < 1024) {
+				return length.ToString() + "b";
+			}
+
+			if (length < 1048576) {
+				return (length/1024).ToString() + "kb";
+			}
+
+			return (length/1048576).ToString() + "mb";
 		}
 	}
 }

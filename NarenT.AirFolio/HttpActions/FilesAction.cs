@@ -2,6 +2,8 @@ using System;
 using NarenT.Net;
 using System.Json;
 using System.Linq;
+using System.IO;
+using System.Text;
 
 namespace NarenT.AirFolio.HttpActions
 {
@@ -32,6 +34,7 @@ namespace NarenT.AirFolio.HttpActions
 
 		public override ActionResult POST (System.Net.HttpListenerContext context, string httpActionPath)
 		{
+			FileRepository.SaveFile(context);
 			return new ActionResult();
 		}
 
