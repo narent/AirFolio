@@ -6,7 +6,7 @@ using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using NarenT.Net;
 
-namespace NarenT.ContactCaster
+namespace NarenT.AirFolio
 {
 	public class Application
 	{

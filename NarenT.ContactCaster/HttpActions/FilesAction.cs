@@ -2,7 +2,7 @@ using System;
 using NarenT.Net;
 using System.Json;
 
-namespace NarenT.ContactCaster.HttpActions
+namespace NarenT.AirFolio.HttpActions
 {
 	public class FilesAction : HttpAction
 	{

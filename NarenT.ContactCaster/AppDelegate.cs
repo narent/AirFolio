@@ -11,12 +11,12 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Text.RegularExpressions;
 using NarenT.Net.HttpServerActions;
-using NarenT.ContactCaster.HttpActions;
+using NarenT.AirFolio.HttpActions;
 using MonoTouch.Dialog;
 using System.Drawing;
 using NarenT.Extensions;
 
-namespace NarenT.ContactCaster
+namespace NarenT.AirFolio
 {
 	// The UIApplicationDelegate for the application. This class is responsible for launching the 
 	// User Interface of the application, as well as listening (and optionally responding) to 

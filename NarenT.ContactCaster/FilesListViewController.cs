@@ -8,7 +8,7 @@ using MonoTouch.UIKit;
 using MonoTouch.Dialog;
 using System.Drawing;
 
-namespace NarenT.ContactCaster
+namespace NarenT.AirFolio
 {
 	public partial class FilesListViewController : DialogViewController
 	{
