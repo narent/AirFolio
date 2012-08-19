@@ -13,6 +13,7 @@
 				    this.Name = ko.observable(data.Name);
 				    this.Size = ko.observable(data.Size);
 				    this.Type = data.Type;
+				    this.Url = data.Url;
 				}
 
 				function FileViewModel() {
@@ -38,7 +39,7 @@
 			<h1>Air Folio</h1>
 		    <ul data-bind="foreach: files" class="files">
 		    	<li class="file">
-		    		<h3 data-bind="text: Name"></h3>
+		    		<a data-bind="attr: { href: Url }"><h3 data-bind="text: Name"></h3></a>
 		    		<div data-bind="text: Type"></div>
 		    		<div data-bind="text: Size"></div>
 			    </li>

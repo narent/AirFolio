@@ -22,7 +22,8 @@ namespace NarenT.AirFolio.HttpActions
 				.Select(f => (JsonValue)new JsonObject { 
 					{ "Name", f.Name },
 					{ "Size", f.Length },
-					{ "Type", f.Extension }
+					{ "Type", f.Extension },
+					{ "Url", "/files/" + f.Name }
 				})
 			);
 
@@ -35,7 +36,10 @@ namespace NarenT.AirFolio.HttpActions
 		public override ActionResult POST (System.Net.HttpListenerContext context, string httpActionPath)
 		{
 			FileRepository.SaveFile(context);
-			return new ActionResult();
+			var result = new ActionResult();
+			result.HttpStatusCode = System.Net.HttpStatusCode.Redirect;
+			result.Headers.Add(Tuple.Create("Location", "/"));
+			return result;
 		}
 
 		public override bool WillProcess (string requestPath)
