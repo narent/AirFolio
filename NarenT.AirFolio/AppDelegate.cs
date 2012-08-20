@@ -47,7 +47,6 @@ namespace NarenT.AirFolio
 		//
 		public override bool FinishedLaunching (UIApplication app, NSDictionary options)
 		{
-
 			string documentsPath = Environment.GetFolderPath (Environment.SpecialFolder.Personal);
 			var testPaths = new string[] { 
 				Path.Combine(documentsPath, "Assignment.docx"),
@@ -79,7 +78,9 @@ namespace NarenT.AirFolio
 			navigationController = new UINavigationController (controller);
 			navigationController.ToolbarHidden = false;
 			window.AddSubview(navigationController.View);
-			//window.RootViewController = navigationController;
+
+			navigationController.NavigationBar.BarStyle = UIBarStyle.Black;
+			navigationController.Toolbar.BarStyle = UIBarStyle.Black;
 
 			AddressLabel = new UILabel(new RectangleF(0.0f, 460.0f, 320.0f, 20.0f)) { BackgroundColor = UIColor.Black };
 			AddressLabel.TextColor = UIColor.White;

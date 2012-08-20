@@ -51,6 +51,7 @@
     <MtouchProfiling>true</MtouchProfiling>
     <CodesignProvision>340B2978-7732-4C76-A5F7-26D66FF49967</CodesignProvision>
     <AssemblyName>NarenTContactCaster</AssemblyName>
+    <IpaPackageName />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>

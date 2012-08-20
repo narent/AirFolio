@@ -1,4 +1,3 @@
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,23 +5,22 @@ using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
 using MonoTouch.Dialog;
+using System.Drawing;
+using System.IO;
 
 namespace NarenT.AirFolio
 {
-	public partial class FileDetailViewController : DialogViewController
+	public partial class FileDetailViewController : UIViewController
 	{
-		public FileDetailViewController (string filename) : base (UITableViewStyle.Plain, null, true)
+		public FileDetailViewController (string filePath)
 		{
-			Root = new RootElement (filename) {
-				new Section (string.Empty){
-					new StringElement ("Hello", () => {
-						new UIAlertView ("Hola", "Thanks for tapping!", null, "Continue").Show (); 
-					})
-				}
-			};
-
+			var webView = new UIWebView(new RectangleF(0.0f, -44.0f, 320.0f, 460.0f));
+			webView.ScalesPageToFit = true;
+			webView.ScrollView.BackgroundColor = UIColor.ScrollViewTexturedBackgroundColor;
+			webView.LoadRequest(new NSUrlRequest(new NSUrl(filePath, false)));
+			this.View = webView;
 			this.SetToolbarItems(AppDelegate.ToolbarButtons, false);
-			this.TableView.BackgroundColor = UIColor.ScrollViewTexturedBackgroundColor;
+			this.NavigationItem.Title = Path.GetFileName(filePath);
 		}
 	}
 }
