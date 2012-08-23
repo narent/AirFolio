@@ -8,12 +8,13 @@ using MonoTouch.UIKit;
 using MonoTouch.Dialog;
 using System.Drawing;
 using System.IO;
+using MonoTouch.CoreGraphics;
 
 namespace NarenT.AirFolio
 {
 	public partial class FilesListViewController : DialogViewController
 	{
-		public FilesListViewController () : base (UITableViewStyle.Grouped, null)
+		public FilesListViewController () : base (UITableViewStyle.Plain, null)
 		{
 			this.Root = new RootElement ("Air Folio") {
 				new Section (string.Empty){
@@ -27,6 +28,18 @@ namespace NarenT.AirFolio
 			base.ViewWillAppear (animated);
 			this.SetToolbarItems(AppDelegate.ToolbarButtons, false);
 			this.TableView.BackgroundColor = UIColor.ScrollViewTexturedBackgroundColor;
+			this.NavigationController.Toolbar.Translucent = true;
+			this.NavigationController.Toolbar.Opaque = false;
+
+			var rect = new RectangleF(0.0f, 0.0f, 1.0f, 1.0f);
+			UIGraphics.BeginImageContext(rect.Size);
+			var context = UIGraphics.GetCurrentContext();
+			context.SetFillColor(UIColor.Clear.CGColor);
+			context.FillRect(rect);
+			var image = UIGraphics.GetImageFromCurrentImageContext();
+			UIGraphics.EndImageContext();
+			this.NavigationController.Toolbar.SetBackgroundImage(image, UIToolbarPosition.Any, UIBarMetrics.Default);
+
 		}
 
 		public void ShowFile(string filename) 
@@ -37,8 +50,13 @@ namespace NarenT.AirFolio
 		private Element CreateElement(FileInfo file)
 		{
 			var subtitle = "Size: " + GetSizeDisplayString(file.Length) + " Modified:" + file.LastWriteTimeUtc.ToLocalTime().ToString("dd-MM-yy hh:mm");
-			var element = new StyledStringElement(file.Name, subtitle, UITableViewCellStyle.Subtitle) { Accessory = UITableViewCellAccessory.DisclosureIndicator };
-			element.Tapped += () => { this.NavigationController.PushViewController(new FileDetailViewController(file.FullName), true); };
+			var element = new StyledStringElement(file.Name, subtitle, UITableViewCellStyle.Subtitle) 
+			{ 
+				Accessory = UITableViewCellAccessory.DisclosureIndicator
+			};
+			element.Tapped += () => { 
+				this.NavigationController.PushViewController(new FileDetailViewController(file.FullName), true); 
+			};
 			return element;
 		}
 

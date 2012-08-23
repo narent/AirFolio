@@ -79,9 +79,6 @@ namespace NarenT.AirFolio
 			navigationController.ToolbarHidden = false;
 			window.AddSubview(navigationController.View);
 
-			navigationController.NavigationBar.BarStyle = UIBarStyle.Black;
-			navigationController.Toolbar.BarStyle = UIBarStyle.Black;
-
 			AddressLabel = new UILabel(new RectangleF(0.0f, 460.0f, 320.0f, 20.0f)) { BackgroundColor = UIColor.Black };
 			AddressLabel.TextColor = UIColor.White;
 			AddressLabel.TextAlignment = UITextAlignment.Center;
