@@ -29,6 +29,24 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+    <style type="text/css">
+      .file {
+        position: relative;
+      }
+      .file > a {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+      form {
+        position: relative;
+      }
+      form > button {
+        position: absolute;
+        top: 0;
+        right: 0;
+      }
+    </style>
   </head>
   <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -54,19 +72,29 @@
       <!-- Example row of columns -->
       <div  data-bind="foreach: files">
         <div class="row">
+          <div class="span3">&nbsp;</div>
           <div class="span6">
-            <h2 data-bind="text: Name"></h2>
-            <span data-bind="text: Type"></span>
-            <span data-bind="text: Size"></span>
-            <a class="btn btn-primary" data-bind="attr: { href: Url }">View &raquo</a>
+            <div class="file">
+              <h2 data-bind="text: Name"></h2>
+              <span data-bind="text: Type"></span>
+              <span data-bind="text: Size"></span>
+              <a class="btn btn-primary" data-bind="attr: { href: Url }">View &raquo</a>
+            </div>
           </div>
+          <div class="span3">&nbsp;</div>
         </div>
       </div>
       <hr>
-      <form action="/files" method="POST" enctype="multipart/form-data">      
-        <div>Upload file: <input type="file" name="fileToUpload" /></div>
-        <button class="btn btn-primary" type="submit">Upload</button>
-      </form>
+      <div class="row">
+        <div class="span3">&nbsp;</div>
+        <div class="span6">
+          <form action="/files" method="POST" enctype="multipart/form-data">
+            <div>Upload file: <input type="file" name="fileToUpload" /></div>
+            <button class="btn btn-primary" type="submit">Upload</button>
+          </form>
+        </div>
+        <div class="span3">&nbsp;</div>
+      </div>
       <footer>
         <p>&copy; Company 2012</p>
       </footer>
