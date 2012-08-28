@@ -65,7 +65,6 @@ namespace NarenT.AirFolio
 			var startHttpServerSwitch = new UISwitch();
 			startHttpServerSwitch.ValueChanged += (sender, e) => { this.StartButtonTapped(); };
 			HttpServerSwitchBarButtonItem = new UIBarButtonItem(startHttpServerSwitch);
-
 			ToolbarButtons = new[] { 
 				new UIBarButtonItem(UIBarButtonSystemItem.FlexibleSpace), 
 				HttpServerSwitchBarButtonItem,
@@ -82,6 +81,8 @@ namespace NarenT.AirFolio
 			AddressLabel = new UILabel(new RectangleF(0.0f, 460.0f, 320.0f, 20.0f)) { BackgroundColor = UIColor.Black };
 			AddressLabel.TextColor = UIColor.White;
 			AddressLabel.TextAlignment = UITextAlignment.Center;
+			AddressLabel.BackgroundColor = UIColor.DarkGray;
+
 			window.AddSubview(AddressLabel);
 			window.SendSubviewToBack(AddressLabel);
 

@@ -9,12 +9,13 @@ using MonoTouch.Dialog;
 using System.Drawing;
 using System.IO;
 using MonoTouch.CoreGraphics;
+using NarenT.Extensions;
 
 namespace NarenT.AirFolio
 {
 	public partial class FilesListViewController : DialogViewController
 	{
-		public FilesListViewController () : base (UITableViewStyle.Plain, null)
+		public FilesListViewController () : base (UITableViewStyle.Grouped, null)
 		{
 			this.Root = new RootElement ("Air Folio") {
 				new Section (string.Empty){
@@ -27,19 +28,10 @@ namespace NarenT.AirFolio
 		{
 			base.ViewWillAppear (animated);
 			this.SetToolbarItems(AppDelegate.ToolbarButtons, false);
-			this.TableView.BackgroundColor = UIColor.ScrollViewTexturedBackgroundColor;
-			this.NavigationController.Toolbar.Translucent = true;
-			this.NavigationController.Toolbar.Opaque = false;
+			this.TableView.BackgroundColor = UIColor.LightGray;
 
-			var rect = new RectangleF(0.0f, 0.0f, 1.0f, 1.0f);
-			UIGraphics.BeginImageContext(rect.Size);
-			var context = UIGraphics.GetCurrentContext();
-			context.SetFillColor(UIColor.Clear.CGColor);
-			context.FillRect(rect);
-			var image = UIGraphics.GetImageFromCurrentImageContext();
-			UIGraphics.EndImageContext();
-			this.NavigationController.Toolbar.SetBackgroundImage(image, UIToolbarPosition.Any, UIBarMetrics.Default);
-
+			this.NavigationController.Toolbar.SetBackgroundColor(UIColor.DarkGray);
+			this.NavigationController.NavigationBar.SetBackgroundColor(UIColor.DarkGray);
 		}
 
 		public void ShowFile(string filename) 
