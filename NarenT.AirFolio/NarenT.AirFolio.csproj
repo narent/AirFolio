@@ -121,7 +121,6 @@
     <Content Include="static\css\cssreset-min.css" />
     <Content Include="static\css\style.css" />
     <Content Include="static\css\style.scss" />
-    <Content Include="static\html\files" />
     <Content Include="static\js\jquery-1.7.2.min.js" />
     <Content Include="static\js\knockout-2.1.0.js" />
     <Content Include="static\index.html" />
@@ -134,5 +133,11 @@
     <Content Include="static\images\dark-metal-grid-7.jpg" />
     <Content Include="static\images\dark-metal-grid-8.jpg" />
     <Content Include="static\images\letterpress.gif" />
+    <Content Include="static\css\bootstrap.css" />
+    <Content Include="static\css\bootstrap.min.css" />
+    <Content Include="static\img\glyphicons-halflings.png" />
+    <Content Include="static\img\glyphicons-halflings-white.png" />
+    <Content Include="static\js\bootstrap.js" />
+    <Content Include="static\js\bootstrap.min.js" />
   </ItemGroup>
 </Project>

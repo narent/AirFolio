@@ -1,53 +1,128 @@
-<html>
-	<head>
-		<title>Air Folio</title>
-		<link rel="stylesheet" type="text/css" href="/css/cssreset-min.css"/>
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-		<link href='http://fonts.googleapis.com/css?family=Quando' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" type="text/css" href="/css/style.css"/>
-		<script type="text/javascript" src="/js/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="/js/knockout-2.1.0.js"></script>
-		<script type="text/javascript">
-			$(function() {
-				function File(data) {
-				    this.Name = ko.observable(data.Name);
-				    this.Size = ko.observable(data.Size);
-				    this.Type = data.Type;
-				    this.Url = data.Url;
-				}
 
-				function FileViewModel() {
-				    var self = this;
-				    self.files = ko.observableArray([]);
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Air Folio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-				    $.getJSON("/files", function(allData) {
-				        var mappedFiles = $.map(allData, function(data) { return new File(data); });
-				        self.files(mappedFiles);
-				    }); 
-				}
+    <!-- Le styles -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+    </style>
+    <link href="/css/bootstrap-responsive.css" rel="stylesheet">
 
-				ko.applyBindings(new FileViewModel());
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-				$(".file").live("click", function(){
-					//$(this).children(".details").slideToggle();
-				});
-			});
-		</script>
-	</head>
-	<body>
-		<div id="content">
-			<h1>Air Folio</h1>
-		    <ul data-bind="foreach: files" class="files">
-		    	<li class="file">
-		    		<a data-bind="attr: { href: Url }"><h3 data-bind="text: Name"></h3></a>
-		    		<div data-bind="text: Type"></div>
-		    		<div data-bind="text: Size"></div>
-			    </li>
-			</ul>
-			<form action="/files" method="POST" enctype="multipart/form-data">			
-				<div>Upload file: <input type="file" name="fileToUpload" /></div>
-				<div><input type="submit" value="Upload"/></div>
-			</form>
-		</div>
-	</body>
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Air Folio</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  <li><a href="#">Action</a></li>
+                  <li><a href="#">Another action</a></li>
+                  <li><a href="#">Something else here</a></li>
+                  <li class="divider"></li>
+                  <li class="nav-header">Nav header</li>
+                  <li><a href="#">Separated link</a></li>
+                  <li><a href="#">One more separated link</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="navbar-form pull-right">
+              <input class="span2" type="text" placeholder="Email">
+              <input class="span2" type="password" placeholder="Password">
+              <button type="submit" class="btn">Sign in</button>
+            </form>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <!--<div class="hero-unit">
+        <h1>Hello, world!</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+      </div>-->
+      <!-- Example row of columns -->
+      <div  data-bind="foreach: files">
+        <div class="row">
+          <div class="span6">
+            <h2 data-bind="text: Name"></h2>
+            <span data-bind="text: Type"></span>
+            <span data-bind="text: Size"></span>
+            <a class="btn btn-primary" data-bind="attr: { href: Url }">View &raquo</a>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <footer>
+        <p>&copy; Company 2012</p>
+      </footer>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/js/jquery-1.7.2.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/knockout-2.1.0.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        function File(data) {
+            this.Name = ko.observable(data.Name);
+            this.Size = ko.observable(data.Size);
+            this.Type = data.Type;
+            this.Url = data.Url;
+        }
+
+        function FileViewModel() {
+            var self = this;
+            self.files = ko.observableArray([]);
+
+            $.getJSON("/files", function(allData) {
+                var mappedFiles = $.map(allData, function(data) { return new File(data); });
+                self.files(mappedFiles);
+            }); 
+        }
+
+        ko.applyBindings(new FileViewModel());
+
+        $(".file").live("click", function(){
+          //$(this).children(".details").slideToggle();
+        });
+      });
+    </script>
+  </body>
 </html>
