@@ -32,19 +32,17 @@
     <style type="text/css">
       .file {
         position: relative;
+        padding: 5px 15px 15px 15px;
+        border-radius:5px;
+        margin-bottom: 10px;
       }
-      .file > a {
+      .file > a.btn {
         position: absolute;
-        top: 0;
-        right: 0;
-      }
-      form {
-        position: relative;
+        top: 5px;
+        right: 5px;
       }
       form > button {
-        position: absolute;
-        top: 0;
-        right: 0;
+        margin-top: 10px;
       }
     </style>
   </head>
@@ -58,45 +56,28 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">Air Folio</a>
+          <button class="btn">Add New File</button>
         </div>
       </div>
     </div>
-
     <div class="container">
-      <!-- Main hero unit for a primary marketing message or call to action -->
-      <!--<div class="hero-unit">
-        <h1>Hello, world!</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-      </div>-->
-      <!-- Example row of columns -->
-      <div  data-bind="foreach: files">
-        <div class="row">
-          <div class="span3">&nbsp;</div>
-          <div class="span6">
-            <div class="file">
-              <h2 data-bind="text: Name"></h2>
-              <span data-bind="text: Type"></span>
-              <span data-bind="text: Size"></span>
-              <a class="btn btn-primary" data-bind="attr: { href: Url }">View &raquo</a>
+      <div class="row">
+        <div class="span2">&nbsp;</div>
+        <div class="span8">
+          <div  data-bind="foreach: files">
+            <div class="file well">
+              <a data-bind="attr: { href: Url }"><h2 data-bind="text: Name"></h2></a>
+              <span data-bind="text: Type" class="label label-inverse"></span>
+              <span data-bind="text: Size" class="label label-inverse"></span>
+              <a class="btn btn-danger">Delete&nbsp;<i class="icon-remove-sign icon-white"></i></a>
             </div>
           </div>
-          <div class="span3">&nbsp;</div>
         </div>
+        <div class="span2">&nbsp;</div>
       </div>
       <hr>
-      <div class="row">
-        <div class="span3">&nbsp;</div>
-        <div class="span6">
-          <form action="/files" method="POST" enctype="multipart/form-data">
-            <div>Upload file: <input type="file" name="fileToUpload" /></div>
-            <button class="btn btn-primary" type="submit">Upload</button>
-          </form>
-        </div>
-        <div class="span3">&nbsp;</div>
-      </div>
       <footer>
-        <p>&copy; Company 2012</p>
+        <p>&copy; Apace Web Pty. Ltd. 2012</p>
       </footer>
     </div> <!-- /container -->
 
