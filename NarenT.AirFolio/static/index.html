@@ -56,7 +56,7 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="#">Air Folio</a>
-          <button class="btn">Add New File</button>
+          <button class="btn" data-toggle="modal" data-target="#addFileModal">Add New File</button>
         </div>
       </div>
     </div>
@@ -79,7 +79,24 @@
       <footer>
         <p>&copy; Apace Web Pty. Ltd. 2012</p>
       </footer>
-    </div> <!-- /container -->
+    </div>
+    <!-- Add file modal dialog -->
+    <div id="addFileModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3 id="myModalLabel">Add a New File</h3>
+      </div>
+      <div class="modal-body">
+        <form action="/files" method="POST" enctype="multipart/form-data" id="AddFileForm">
+          <div>File: <input type="file" name="fileToUpload" /></div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal">Cancel</button>
+        <button class="btn btn-primary" onclick="$('#AddFileForm').submit();">Upload</button>
+      </div>
+    </div>
+    <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
